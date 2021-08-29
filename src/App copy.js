@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const [coat, setCoat] = useState(['다이어트', '프로젝트 성공', 'JAX 독학']);
+  const [coat, setCoat] = useState([
+    { title: '다이어트', date: '2021년 8월 29일' },
+    { title: '프로젝트 성공', date: '2021년 8월 30일' },
+    { title: 'JAX 독학', date: '2021년 8월 31일' }
+  ]);
   const [clickedTitle, setClickedTitle] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [dislike, setDislike] = useState(0);
@@ -11,14 +15,10 @@ function App() {
   const onClickLikeButton = () => {
     setLike(like + 1)
   }
-  // const onClickChangeButton = () => {
-  //   var newArray = [...coat];
-  //   newArray[0] = '남자 코트 추천'
-  //   setCoat(newArray)
-  // }
 
   const Ascending = () => {
     let titleAsc = [...coat];
+    console.log(titleAsc.map(a => a.sort()))
     titleAsc.sort();
     setCoat(titleAsc);
   }
@@ -40,19 +40,23 @@ function App() {
       </div>
       {/* <button onClick={onClickChangeButton}>변경</button> */}
       {
-        coat.map((list, index) =>
-          <div className="list" key={index}>
-            <h3 onClick={() => setClickedTitle(index)}>
-              {list}
-              <span onClick={onClickLikeButton}> 👍 </span> {like}
-              <span onClick={() => setDislike(dislike - 1)}> 👎 </span> {dislike}
-            </h3>
-            <span>8월 30일 발행</span>
-            <hr />
-          </div>
-        )
+        coat.map(list => {
+          return (
+            <div>
+              <h3 onClick={() => setClickedTitle(index)}>
+                {list.title}
+                <span onClick={onClickLikeButton}> 👍 </span> {like}
+                <span onClick={() => setDislike(dislike - 1)}> 👎 </span> {dislike}
+              </h3>
+              <span>{list.date}</span>
+              <hr />
+            </div>
+          );
+        })
       }
+      {/*
       <Modal coat={coat} clickedTitle={clickedTitle} />
+      */}
     </div >
   );
 }
