@@ -41,7 +41,7 @@ function App() {
       </div>
       {/* <button onClick={onClickChangeButton}>변경</button> */}
       {
-        coat.map(list => {
+        coat.map((list, index) => {
           return (
             <div>
               <h3 onClick={() => setClickedTitle(index)}>
@@ -55,9 +55,7 @@ function App() {
           );
         })
       }
-      {/*
       <Modal coat={coat} clickedTitle={clickedTitle} />
-      */}
     </div >
   );
 }
@@ -69,8 +67,8 @@ const Modal = ({ coat, clickedTitle }) => {
       padding: '20px',
       background: '#eee',
     }}>
-      <h2>{coat[clickedTitle]}</h2>
-      <p>날짜</p>
+      <h2>{coat[clickedTitle].title}</h2>
+      <p>{coat[clickedTitle].date}</p>
       <p>상세내용</p>
     </div >
   );
